@@ -25,6 +25,7 @@ type Cliente {
     }
 
     type Query {
+        getClientes : [Cliente]
         getCliente(id: ID) : Cliente
     }
     
@@ -53,5 +54,7 @@ type Cliente {
     type Mutation {
         #Nombre del Resolver , input de datos y valor que retorna
         """ Te permite Crear Nuevos Clientes """
-        crearCliente( input:ClienteInput ): Cliente
+        crearCliente( input: ClienteInput ): Cliente
+        actualizarCliente(input: ClienteInput ) : Cliente
+        eliminarCliente(id : ID): String 
     }
