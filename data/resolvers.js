@@ -4,9 +4,12 @@ import {Clientes} from './db';
 
 export const resolvers = {
     Query : {
+        getClientes : ()=>{
+            return Clientes.find({})
+        },
         getCliente: ({id})=> {
             return new Cliente(id,clientesDB[id]);
-        },
+        }
     },
     Mutation: {
         crearCliente: (root,{input})=>{
@@ -25,9 +28,25 @@ export const resolvers = {
             return new Promise((resolve,object)=>{
                 nuevoCliente.save((error)=>{
                     if(error) rejects(error)
-                    else resolve(nuevoCliente)
+                    else resolve(nuevoCliente) 
                 })
             });
+        },
+        actualizarCliente: (root,{input})=> {
+            return new Promise((resolve, object)=>{
+                Clientes.findOneAndUpdate({_id : input.id} , input, {new: true},(error,cliente)=>{
+                    if (error) rejects (error)
+                    else resolve (cliente)
+                })
+            })
+        },
+        eliminarCliente: (root, {id})=>{
+            return new Promise((resolve,object)=>{
+                Clientes.findOneAndRemove({_id : id},(error)=>{
+                    if (error) rejects(error)
+                    else resolve("Se Elimino Correctamente el Cliente")
+                })
+            })
         }
     }
 }
