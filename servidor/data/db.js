@@ -12,7 +12,7 @@ monggose.connect('mongodb+srv://jhon:jhon123@cluster0-tc5an.mongodb.net/test?ret
     nombre: String,
     apellido: String,
     empresa: String,
-    emails : Array,
+    email : String,
     edad : Number,
     tipo: String,
     pedidos: Array

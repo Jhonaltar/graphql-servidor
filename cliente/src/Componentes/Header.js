@@ -1,20 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => (
-   
-  <nav>
-  <div className="nav-wrapper">
-    <a href="#!" className="brand-logo"><i className="material-icons">cloud</i>Logo</a>
-    <ul className="right hide-on-med-and-down">
-      <li><a className="waves-effect waves-light btn">Button</a></li>
-      <li><a href="sass.html"><i className="material-icons">search</i></a></li>
-      <li><a href="badges.html"><i className="material-icons">view_module</i></a></li>
-      <li><a href="collapsible.html"><i className="material-icons">refresh</i></a></li>
-      <li><a href="mobile.html"><i className="material-icons">more_vert</i></a></li>
-    </ul>
-  </div>
-</nav>
+  <nav className="nav-wrapper blue mb-4">
+    <div className="container">
+      <div className="nav-wrapper">
+        <Link to="/" className="brand-logo">
+        <i className="material-icons right">local_grocery_store</i> SISCART 
+        </Link>
+        
+        <ul className="right hide-on-med-and-down">
+          <Link to="/cliente/nuevo" className="waves-effect waves-light btn">
+          <i className="material-icons left">add_circle</i> Nuevo Clientes
+          </Link>
+        </ul>
+      </div>
+    </div>
+  </nav>
 );
 
 export default Header;
-
