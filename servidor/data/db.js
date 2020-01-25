@@ -8,6 +8,10 @@ monggose.connect('mongodb+srv://jhon:jhon123@cluster0-tc5an.mongodb.net/test?ret
 }).then(db => console.log('DB is connected'))
   .catch(err =>console.log(err));
 
+
+
+  //Clientes
+
   const clientesSchema = new monggose.Schema ({
     nombre: String,
     apellido: String,
@@ -21,4 +25,13 @@ monggose.connect('mongodb+srv://jhon:jhon123@cluster0-tc5an.mongodb.net/test?ret
 
   const Clientes = monggose.model('clientes',clientesSchema)
 
-  export {Clientes};
+  //Productos
+
+  const productosSchema = new monggose.Schema({
+      nombre: String,
+      precio: Number,
+      stock : Number
+  });
+  const Productos = monggose.model('productos',productosSchema)
+
+  export {Clientes,Productos};
