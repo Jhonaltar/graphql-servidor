@@ -17,8 +17,11 @@ const Header = () => (
 
       <div className="collapse navbar-collapse" id="navegacion">
         <ul className="right hide-on-med-and-down navbar-nav ml-auto text-right">
-          <Link to="/cliente/nuevo" className="waves-effect waves-light btn" style={ hStyle1 }>
+          <Link to="/cliente/nuevo" className="waves-effect waves-light btn mr-2" style={ hStyle1 }>
             <i className="material-icons left">add_circle</i> Nuevo Clientes
+          </Link>
+          <Link to="/productos/nuevo" className="waves-effect waves-light btn deep-orange lighten-1" style={ hStyle1 }>
+            <i className="material-icons left">add_circle</i> Nuevo Productos
           </Link>
         </ul>
       </div>

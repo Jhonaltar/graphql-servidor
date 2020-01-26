@@ -7,10 +7,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 // importar Componentes
-import Header from './Componentes/Header';
-import Clientes from './Componentes/Clientes';
-import EditarCliente from './Componentes/EditarCliente';
-import NuevoCliente from './Componentes/NuevoCliente';
+import Header from './Componentes/Layout/Header';
+import Clientes from './Componentes/Clientes/Clientes';
+import EditarCliente from './Componentes/Clientes/EditarCliente';
+import NuevoCliente from './Componentes/Clientes/NuevoCliente';
+
+import NuevoProducto from './Componentes/Productos/NuevoProducto';
 
 
 const client = new ApolloClient({
@@ -36,6 +38,8 @@ class App extends Component {
                 <Route exact path="/" component={Clientes}/>
                 <Route exact path="/cliente/editar/:id" component={EditarCliente}/>
                 <Route exact path="/cliente/nuevo" component={NuevoCliente}/>
+
+                <Route exact path="/productos/nuevo" component={NuevoProducto}/>
               </Switch>
             </div>
           </Fragment>
