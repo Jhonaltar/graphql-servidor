@@ -3,6 +3,9 @@ import React, { Component, Fragment } from 'react'
 import { NUEVO_CLIENTE } from '../../mutations';
 import { Mutation } from 'react-apollo';
 
+import { ToastContainer, toast } from 'react-toastify';
+import App from '../../App.css';
+
 
 class NuevoCliente extends Component {
 
@@ -53,9 +56,10 @@ class NuevoCliente extends Component {
             <Fragment>
                 <h1 className="text-center">Nuevo Cliente </h1 >
                 {respuesta}
+                <ToastContainer autoClose={3000} />
                 <div className="row justify-content-center">
                     <Mutation mutation={NUEVO_CLIENTE}
-                        onCompleted={() => this.props.history.push('/')}
+                        onCompleted={() => this.props.history.push('/clientes')}
                     >
                         {crearCliente => (
                             <form className="col-md-8 m-3"
@@ -66,7 +70,7 @@ class NuevoCliente extends Component {
                                     if (nombre === '' || apellido === '' || empresa === '' || edad === '' || tipo === '') {
                                         this.setState({
                                             error: true
-                                        });
+                                        })
                                         return;
                                     }
                                     this.setState({
