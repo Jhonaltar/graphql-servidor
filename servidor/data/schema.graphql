@@ -22,7 +22,12 @@ type Pedido {
         fecha: String
         cliente: ID
         estado: EstadoPedido
-    }    
+    } 
+
+type ClienteTotal {
+    total: Float
+    cliente: [Cliente]
+}   
 
     type Email {
         email: String
@@ -56,6 +61,9 @@ type Pedido {
 
         #Pedidos
         obtenerPedidos(cliente: String) : [Pedido]
+
+        #Graficas
+        topClientes: [ClienteTotal]
     }
       
     input EmailInput {
@@ -68,7 +76,7 @@ type Pedido {
         nombre: String!
         apellido: String!
         empresa: String!
-        emails: [EmailInput]!
+        emails: [EmailInput]
         edad : Int!
         tipo: TipoCliente!
         pedidos: [PedidoInput]

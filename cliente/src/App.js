@@ -20,6 +20,8 @@ import EditarProducto from './Componentes/Productos/EditarProducto';
 import NuevoPedido from './Componentes/Pedidos/NuevoPedido';
 import PedidosCliente from './Componentes/Pedidos/PedidosCliente';
 
+import Panel from './Componentes/Panel/Panel';
+
 
 
 const client = new ApolloClient({
@@ -52,6 +54,8 @@ class App extends Component {
 
                 <Route exact path="/pedidos/nuevo/:id" component={NuevoPedido}/>
                 <Route exact path="/pedidos/:id" component={PedidosCliente}/>
+
+                <Route exact path="/panel" component={Panel}/>
               </Switch>
             </div>
           </Fragment>

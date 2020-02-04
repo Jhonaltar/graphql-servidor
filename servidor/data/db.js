@@ -41,7 +41,7 @@ monggose.connect('mongodb+srv://jhon:jhon123@cluster0-tc5an.mongodb.net/test?ret
       pedido: Array,
       total: Number,
       fecha: Date,
-      cliente: String,
+      cliente: monggose.Types.ObjectId,
       estado: String
   }) 
 
