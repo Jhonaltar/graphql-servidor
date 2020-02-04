@@ -12,9 +12,9 @@ import { Link } from 'react-router-dom';
 import Exito from '../Alertas/Exito';
 import Paginador from '../Paginador';
 
-import toast1 from 'toasted-notes'
+//import toast1 from 'toasted-notes'
 import { ToastContainer, toast } from 'react-toastify';
-import App from '../../App.css';
+//import App from '../../App.css';
 
 const hStyle1 = { color: 'white' };
 

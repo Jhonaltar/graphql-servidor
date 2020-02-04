@@ -4,7 +4,9 @@ import { NUEVO_CLIENTE } from '../../mutations';
 import { Mutation } from 'react-apollo';
 
 import { ToastContainer, toast } from 'react-toastify';
-import App from '../../App.css';
+
+
+//import App from '../../App.css';
 
 
 class NuevoCliente extends Component {
@@ -51,11 +53,14 @@ class NuevoCliente extends Component {
 
     render() {
         const { error } = this.state;
-        let respuesta = (error) ? <p className=" card-panel  red darken-1 text-center">Todos los campos son obligatorios</p> : '';
+        let respuesta = (error) ?  toast.error("Complete todos los campos", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+
+        }) : '';
         return (
             <Fragment>
                 <h1 className="text-center">Nuevo Cliente </h1 >
-                {respuesta}
+                
                 <ToastContainer autoClose={3000} />
                 <div className="row justify-content-center">
                     <Mutation mutation={NUEVO_CLIENTE}

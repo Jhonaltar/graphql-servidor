@@ -34,4 +34,17 @@ monggose.connect('mongodb+srv://jhon:jhon123@cluster0-tc5an.mongodb.net/test?ret
   });
   const Productos = monggose.model('productos',productosSchema)
 
-  export {Clientes,Productos};
+
+  // Pedidos
+
+  const pedidosSchema = new monggose.Schema({
+      pedido: Array,
+      total: Number,
+      fecha: Date,
+      cliente: String,
+      estado: String
+  }) 
+
+  const Pedidos = monggose.model('pedidos',pedidosSchema)
+
+  export {Clientes,Productos, Pedidos};

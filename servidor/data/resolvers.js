@@ -1,5 +1,5 @@
 
-import {Clientes, Productos} from './db';
+import {Clientes, Productos, Pedidos} from './db';
 import {rejects} from 'assert';
 
 
@@ -27,8 +27,12 @@ export const resolvers = {
         },
 
         //Productos
-        obtenerProductos : (root,{limite,offset})=>{
-            return Productos.find({}).limit(limite).skip(offset)
+        obtenerProductos : (root,{limite,offset,stock})=>{
+            let filtro;
+            if(stock) {
+                filtro = { stock: {$gt : 0}}
+            }
+            return Productos.find(filtro).limit(limite).skip(offset)
         },
         obtenerProducto : (root,{id})=>{
             return new Promise((resolve,object)=>{
@@ -43,6 +47,15 @@ export const resolvers = {
                 Productos.countDocuments({},(error, count)=>{
                     if(error) rejects(error)
                     else resolve(count )
+                })
+            })
+        },
+        // Obtener los pedidos del cliente 
+        obtenerPedidos: (root,{cliente})=>{
+            return new Promise((resolve,object)=>{
+                Pedidos.find({cliente : cliente}, (error,pedido)=>{
+                    if(error) rejects(error);
+                    else resolve(pedido)
                 })
             })
         }
@@ -114,6 +127,55 @@ export const resolvers = {
                 Productos.findOneAndDelete({_id : id},(error)=>{
                     if (error) rejects(error)
                     else resolve("Se Elimino Correctamente el Producto")
+                })
+            })
+        },
+        //Pedidos
+        nuevoPedido: (root,{input})=>{
+            const nuevoPedido = new Pedidos({
+                pedido : input.pedido,
+                total : input.total,
+                fecha : new Date(),
+                cliente : input.cliente,
+                estado : "PENDIENTE"
+            });
+            nuevoPedido.id = nuevoPedido._id 
+            return new Promise((resolve,object)=>{
+                nuevoPedido.save((error)=>{
+                    if(error) rejects(error)
+                    else resolve(nuevoPedido)
+                })
+            })
+        },
+        //Para Actualizar estados
+        actualizarEstado : (root , {input}) =>{
+            return new Promise((resolve,object)=>{
+
+                //Recorrer y Actualizar la cantidad de productos en base al estado del pedido
+
+                const {estado} = input;
+
+                let instruccion;
+                if(estado ==='COMPLETADO'){
+                    instruccion = '-';
+                }else if(estado === 'CANCELADO'){
+                    instruccion = '+'
+                }
+
+                input.pedido.forEach(pedido =>{
+                    Productos.updateOne({_id : pedido.id},
+                        {
+                        "$inc" : 
+                        {
+                           "stock" :`${instruccion}${pedido.cantidad}`
+                        }
+                    }, function(error){
+                        if(error) return new Error(error)
+                    })
+                })
+                Pedidos.findOneAndUpdate({_id : input.id} , input, {new: true},(error)=>{
+                    if(error) rejects(error);
+                    else resolve('Se Actualizo Correctamente')
                 })
             })
         }

@@ -8,9 +8,15 @@ import { ELIMINAR_CLIENTE } from '../../mutations';
 import Paginador from '../Paginador';
 
 import { ToastContainer, toast } from 'react-toastify';
-import App from '../../App.css';
+
 
 const hStyle1 = { color: 'white' };
+const hStyle2 = { 
+    color: 'white',
+    marginLeft: '-300px'
+};
+
+
 
 class Clientes extends Component {
 
@@ -61,8 +67,11 @@ class Clientes extends Component {
                                             <div className="row justify-content-between align-items-center">
                                                 <div className="col-md-8 d-flex justify-content-between align-items-center">
                                                     {item.nombre} {item.apellido} - {item.empresa}
+                                                    {item.email}
                                                 </div>
                                                 <div className="col-md-4 d-flex justify-content-end">
+                                                    <Link to={`/pedidos/nuevo/${id}`} className="waves-effect waves-light btn  orange mr-2" style={hStyle2}><i className="material-icons left">add_shopping_cart</i> Nuevo Pedido</Link>
+                                                    <Link to={`/pedidos/${id}`} className="waves-effect waves-light btn  light-blue darken-1  mr-2" style={hStyle1}><i className="material-icons left">remove_red_eye</i> Ver Pedido</Link>
                                                     <Mutation mutation={ELIMINAR_CLIENTE}>
                                                         {eliminarCliente => (
                                                             <button type="button" className="waves-effect waves-light btn  red lighten-1 mr-2" style={hStyle1}
@@ -71,7 +80,7 @@ class Clientes extends Component {
                                                                     if (window.confirm('Seguro que deseas Eliminar ?')) {
                                                                         eliminarCliente({
                                                                             variables: { id }
-                                                                        },toast.success("Se Elimino Correctamente el Cliente", {
+                                                                        }, toast.success("Se Elimino Correctamente el Cliente", {
                                                                             position: toast.POSITION.BOTTOM_RIGHT,
 
                                                                         }))
@@ -80,9 +89,9 @@ class Clientes extends Component {
                                                             ><i className="material-icons left">delete_forever</i> Eliminar</button>
                                                         )}
                                                     </Mutation>
-                                                    <Link to={`/cliente/editar/${item.id}`} className="waves-effect waves-light btn" style={hStyle1}><i className="material-icons right">edit</i>
+                                                    <Link to={`/clientes/editar/${item.id}`} className="waves-effect waves-light btn" style={hStyle1}><i className="material-icons left">edit</i>
                                                         Editar
-                                        </Link>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </li>
